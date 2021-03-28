@@ -133,13 +133,27 @@ func (eventDataInstance *eventData) bookHandler(w http.ResponseWriter, r *http.R
 	wg.Wait()
 }
 func (eventDataInstance *eventData) viewBookings(input_name string) map[string]interface{} {
+	filePath := "data.json"
+	fmt.Printf("// reading file %s\n", filePath)
+	file, err1 := ioutil.ReadFile(filePath)
+	if err1 != nil {
+		fmt.Printf("// error while reading file %s\n", filePath)
+		fmt.Printf("File error: %v\n", err1)
+		os.Exit(1)
+	}
+	var userSchedule map[string]interface{}
+	err2 := json.Unmarshal([]byte(file), &userSchedule)
+	if err2 != nil {
+		fmt.Println("error:", err2)
+		os.Exit(1)
+	}
 	fmt.Println("Entered view page", "input_user", input_name)
 	fmt.Println("mutex locked = ", MutexLocked(&eventDataInstance.mu))
 	eventDataInstance.mu.Lock()
 	fmt.Println("Entered view page")
-	var userData eventData
-	userData.scheduleInfo = eventDataInstance.scheduleInfo
-	userSchedule := userData.scheduleInfo
+	for key := range eventDataInstance.scheduleInfo {
+		userSchedule[key] = eventDataInstance.scheduleInfo[key]
+	}
 	fmt.Println(userSchedule)
 	deleteKey := ""
 	for k := range userSchedule {
