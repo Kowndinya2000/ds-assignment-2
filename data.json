@@ -1,0 +1,8 @@
+{
+    "timestamp" : {
+        "user"  : "username",
+        "event" : "event title",
+        "blockedUsers" : ""
+    }
+
+}

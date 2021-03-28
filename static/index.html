@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form action="/book" method="post">
+            <label for="name">Organizer: </label>
+            <input type="text" name="name" id="name" autocomplete="username" required>
+            <br><br>
+            <label for="participants">Participants: </label>
+            <input type="text" name="participants" id="participants" autocomplete="username" required disabled>
+            <br><br>
+            <label for="enable_participants">Enable Participants: </label>
+            <input type="checkbox" name="enable_participants" id="enable_participants">
+            <br><br>
+            <label for="time">Time: </label>
+            <input type="time" name="time" id="time" min="09:00" max="18:00" required>
+            <br><br>
+            <label for="date">Date: </label>
+            <input type="date" name="date" id="date" required>
+            <br><br>
+            <label for="event">Event Name: </label>
+            <input type="text" name="event" id="event" required>
+            <br><br>
+            <label for="submit">Submit</label>
+            <input type="submit" value="submit" id="submit">
+        </form>
+        <script>
+            document.getElementById('enable_participants').onchange = function() {
+            document.getElementById('participants').disabled = !this.checked;
+            };
+        </script>
+    </body>
+</html>
